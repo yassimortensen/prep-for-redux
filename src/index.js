@@ -12,7 +12,7 @@ const reducer = (state = { count: 101 }, action) => {
 
   switch (action.type) {
     case 'INCREMENT':
-      return { count: state.count + 1 };
+      return { count: state.count + action.amount };
     case 'DECREMENT':
       return { count: state.count - 1 };
     default:
@@ -59,8 +59,8 @@ class Counter extends Component {
     store.subscribe(() => this.setState({}));
   }
 
-  increment = () => {
-    store.dispatch({ type: 'INCREMENT' });
+  increment = (amount) => {
+    store.dispatch({ type: 'INCREMENT', amount: amount });
     // this.setState(prevState => ({ count: prevState.count + 1 }));
   };
 
@@ -80,9 +80,9 @@ class Counter extends Component {
       <div className="Counter">
         <h1>{store.getState().count}</h1>
         <button onClick={this.decrement}> - </button>
-        <button onClick={this.increment}> + </button>
-        <button onClick={() => {}}> + 2</button>
-        <button onClick={() => {}}> + 5</button>
+        <button onClick={() => this.increment(1)}> + </button>
+        <button onClick={() => this.increment(2)}> + 2</button>
+        <button onClick={() => this.increment(5)}> + 5</button>
         {/* <h3>{this.renderDescription()}</h3> */}
       </div>
     );
